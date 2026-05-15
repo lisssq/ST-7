@@ -7,21 +7,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Task2 {
+
     public static void run(WebDriver webDriver) {
         try {
             System.out.println("=== ЗАДАНИЕ №2 ===");
             webDriver.get("https://api.ipify.org/?format=json");
-            
+
             WebElement elem = webDriver.findElement(By.tagName("pre"));
             String jsonStr = elem.getText();
-            
+
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject) parser.parse(jsonStr);
-            
+
             String ip = (String) obj.get("ip");
             System.out.println("IP4-адрес клиента: " + ip);
             System.out.println();
-            
+
         } catch (Exception e) {
             System.out.println("Ошибка выполнения Задания №2: " + e.toString());
         }
