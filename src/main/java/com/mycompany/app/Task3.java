@@ -1,5 +1,6 @@
 package com.mycompany.app;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -51,11 +52,18 @@ public class Task3 {
     }
 
     private static void saveForecast(String textData) {
-        try (FileWriter writer = new FileWriter("forecast.txt")) {
+        try {
+            File dir = new File("result");
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            FileWriter writer = new FileWriter("result/forecast.txt");
             writer.write(textData);
-            System.out.println("Прогноз сохранен в файл forecast.txt");
+            writer.close();
+            System.out.println("Результат успешно сохранен в файл 'result/forecast.txt'");
         } catch (IOException e) {
             System.out.println("Не удалось сохранить файл таблицы: " + e.getMessage());
         }
     }
+
 }
