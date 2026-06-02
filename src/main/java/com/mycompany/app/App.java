@@ -13,24 +13,19 @@ public class App {
         WebDriver webDriver = new ChromeDriver();
 
         try {
-            System.out.println("=== Task #1 ===");
+            System.out.println("Задание 1");
             webDriver.get("https://www.calculator.net/password-generator.html");
 
-            Thread.sleep(2000);
+            WebElement passwordField = webDriver.findElement(By.className("verybigtext"));
+            String text = passwordField.getText();
 
-            WebElement passwordElement = webDriver.findElement(By.cssSelector(".verybigtext b"));
-            String generatedPassword = passwordElement.getText();
-
-            System.out.println("Пароль от сервера: " + generatedPassword);
-            System.out.println();
+            System.out.println("Пароль от сервера: " + text);
 
             Task2.run(webDriver);
             Task3.run(webDriver);
 
-            Thread.sleep(3000);
         } catch (Exception e) {
-            System.out.println("Ошибка выполнения Задания №1:");
-            System.out.println(e.toString());
+            System.out.println("Ошибка выполнения Задания 1: " + e.getMessage());
         } finally {
             webDriver.quit();
         }
